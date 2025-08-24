@@ -1,9 +1,11 @@
 import random
+import sketch
 
 def play_game():
+    stages = sketch.stages
     word_list = ["apple", "banana", "grape", "mango", "orange","colombo","coconut","pineapple"]
     random_word = random.choice(word_list)
-    attempts = 20
+    attempts = 0
 
     print("Welcome to the WORD GUESSING GAME!\n")
     print("I HAVE A WORD IN MY MIND !!!..CAN YOU GUESS IT..???\n")
@@ -13,8 +15,7 @@ def play_game():
     guess_list = ['_' for i in range(len(random_word))]
     guessed_letters = set()
     while True:
-        if attempts == 0:
-            print(f"💀 Sorry,You Lost..your all attempts finished:( ,The secret word was, {random_word}")
+
         guess_letter = input("Guess a letter: ").lower().strip()
 
         if guess_letter in guessed_letters:
@@ -36,8 +37,14 @@ def play_game():
                     print(f"🎉 YOU WON !!! you guess the WORD {random_word} within {attempts} attempts...\n")
                     break
             else:
-                attempts -= 1
-                print(f"OH SORRY !! YOUR GUESS WAS WRONG..{attempts} attempts more left... ")
+                attempts += 1
+                print(f"OH SORRY !! YOUR GUESS WAS WRONG... ")
+                if attempts <= 7:
+                    print(stages[attempts - 1])
+                else:
+                    print("you lost... hang man is completed")
+
+
         else:
             print("⚠️ Sorry, one letter at a time")
 
